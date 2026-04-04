@@ -1,19 +1,14 @@
 #include <iostream>
 #include "../include/Movie.h"
 #include "../include/DynamicArray.h"
+#include "../include/CsvReader.h"
 
 int main(){
-    DynamicArray movies;
+   
+    CsvReader reader;
+    DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
 
-    movies.pushBack(Movie("Inception", 8.8));
-    movies.pushBack(Movie("b", 10.0));
-    movies.pushBack(Movie("c", 2.9));
-
-    for (int i = 0; i < movies.getSize(); i++){
-        std::cout << "Tytul: "<< movies.get(i).getTitle() << std::endl;
-        std::cout << "Ranking:" << movies.get(i).getRanking() << std::endl;
-        std::cout << std::endl;
-    }
+    std::cout << "Liczba wczytanych filmow: " << movies.getSize() << std::endl;
 
     return 0;
 }

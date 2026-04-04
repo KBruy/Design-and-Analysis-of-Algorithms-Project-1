@@ -14,6 +14,10 @@ private:
 
 public: 
     DynamicArray();
+    DynamicArray(const DynamicArray& other);
+    DynamicArray& operator=(const DynamicArray& other);
+    DynamicArray(DynamicArray&& other) noexcept;
+    DynamicArray& operator=(DynamicArray&& other) noexcept;
     ~DynamicArray();
 
     void pushBack(const Movie& movie);
