@@ -1,27 +1,20 @@
 #include <iostream>
-#include "../include/Movie.h"
-#include "../include/DynamicArray.h"
+#include "../include/CsvReader.h"
+#include "../include/DataFilter.h"
 
 int main() {
-    DynamicArray movies;
-    movies.pushBack(Movie("Film 1", 8.0, true));
-    movies.pushBack(Movie("Film 2", 7.5, true));
-    movies.pushBack(Movie("Film 3", 9.1, true));
-    movies.pushBack(Movie("Film 4", 6.8, true));
+    CsvReader reader;
+    DataFilter filter;
 
-    DynamicArray smallSet = movies.getFirstN(2);
+    DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
+    DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
 
-    std::cout << "Pelna tablica:" << std::endl;
-    for (int i = 0; i < movies.getSize(); i++) {
-        std::cout << movies.get(i).getTitle() << std::endl;
-    }
+    DynamicArray data10000 = filter.prepareDataSet(filteredMovies, 10000);
+    DynamicArray data100000 = filter.prepareDataSet(filteredMovies, 100000);
 
-    std::cout << std::endl;
-
-    std::cout << "Pierwsze 2 elementy:" << std::endl;
-    for (int i = 0; i < smallSet.getSize(); i++) {
-        std::cout << smallSet.get(i).getTitle() << std::endl;
-    }
+    std::cout << "Liczba filmow po filtrowaniu: " << filteredMovies.getSize() << std::endl;
+    std::cout << "Rozmiar zbioru 10000: " << data10000.getSize() << std::endl;
+    std::cout << "Rozmiar zbioru 100000: " << data100000.getSize() << std::endl;
 
     return 0;
 }
