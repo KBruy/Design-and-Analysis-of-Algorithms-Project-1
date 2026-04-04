@@ -1,45 +1,21 @@
 #include <iostream>
-#include <iomanip>
-#include <chrono>
-#include "../include/CsvReader.h"
-#include "../include/DataFilter.h"
+#include "../include/Movie.h"
+#include "../include/DynamicArray.h"
 
 int main() {
-    CsvReader reader;
-    DataFilter filter;
+    DynamicArray movies;
+    movies.pushBack(Movie("Film 1", 8.0, true));
+    movies.pushBack(Movie("Film 2", 7.5, true));
 
-    DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
+    DynamicArray copy = movies;
 
-    auto searchStart = std::chrono::high_resolution_clock::now();
-    int missingRatings = filter.countMoviesWithoutRating(movies);
-    auto searchEnd = std::chrono::high_resolution_clock::now();
+    movies.get(0).setTitle("Zmieniony film");
 
-    auto filterStart = std::chrono::high_resolution_clock::now();
-    DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
-    auto filterEnd = std::chrono::high_resolution_clock::now();
+    std::cout << "Oryginal:" << std::endl;
+    std::cout << movies.get(0).getTitle() << std::endl;
 
-    auto searchDuration = std::chrono::duration_cast<std::chrono::milliseconds>(searchEnd - searchStart);
-    auto filterDuration = std::chrono::duration_cast<std::chrono::milliseconds>(filterEnd - filterStart);
-
-    std::cout << "Liczba wszystkich filmow: " << movies.getSize() << std::endl;
-    std::cout << "Liczba filmow bez rankingu: " << missingRatings << std::endl;
-    std::cout << "Liczba filmow po filtrowaniu: " << filteredMovies.getSize() << std::endl;
-    std::cout << "Czas przeszukiwania: " << searchDuration.count() << " ms" << std::endl;
-    std::cout << "Czas filtrowania: " << filterDuration.count() << " ms" << std::endl;
-    std::cout << std::endl;
-
-    std::cout << std::fixed << std::setprecision(1);
-
-    int limit = 5;
-    if (filteredMovies.getSize() < limit) {
-        limit = filteredMovies.getSize();
-    }
-
-    for (int i = 0; i < limit; i++) {
-        std::cout << "Tytul: " << filteredMovies.get(i).getTitle() << std::endl;
-        std::cout << "Ranking: " << filteredMovies.get(i).getRanking() << std::endl;
-        std::cout << std::endl;
-    }
+    std::cout << "Kopia:" << std::endl;
+    std::cout << copy.get(0).getTitle() << std::endl;
 
     return 0;
 }

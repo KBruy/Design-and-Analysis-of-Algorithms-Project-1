@@ -14,10 +14,8 @@ private:
 
 public: 
     DynamicArray();
-    DynamicArray(const DynamicArray& other);
-    DynamicArray& operator=(const DynamicArray& other);
-    DynamicArray(DynamicArray&& other) noexcept;
-    DynamicArray& operator=(DynamicArray&& other) noexcept;
+    DynamicArray(const DynamicArray& other); //konstruktor kopiujący do tworzenia nowych obiektów jako kopii starego
+    DynamicArray& operator=(const DynamicArray& other); //operator przypisania kiedy jeden obiekt ma dostać zawartość drugiego
     ~DynamicArray();
 
     void pushBack(const Movie& movie);
