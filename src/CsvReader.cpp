@@ -5,8 +5,8 @@
 #include <string>
 
 Movie CsvReader::parseLine(const std::string& line) {
-    size_t firstComma = line.find(','); //szuka pierwszego przecinka (docelowo to będzie indeks)
-    size_t lastComma = line.rfind(','); //szuka ostatniego przecinka (docelowo jest to ocena, wszystko co pomiedzy bedziemy traktować jak tytul)
+    size_t firstComma = line.find(',');
+    size_t lastComma = line.rfind(',');
 
     std::string title = "";
     std::string ratingText = "";
@@ -24,13 +24,12 @@ Movie CsvReader::parseLine(const std::string& line) {
         title = title.substr(0, title.length() - 1);
     }
 
-    double rating = 0.0;
-
-    if (!ratingText.empty()) {
-        rating = std::stod(ratingText);
+    if (ratingText.empty()) {
+        return Movie(title, 0.0, false);
     }
 
-    return Movie(title, rating);
+    double rating = std::stod(ratingText);
+    return Movie(title, rating, true);
 }
 
 DynamicArray CsvReader::loadMoviesFromFile(const std::string& fileName) {
