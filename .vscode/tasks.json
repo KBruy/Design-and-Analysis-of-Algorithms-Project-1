@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Prepare build directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "${workspaceFolder}/build"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build C++ project",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-I${workspaceFolder}/include",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/Movie.cpp",
+                "${workspaceFolder}/src/DynamicArray.cpp",
+                "-o",
+                "${workspaceFolder}/build/app"
+            ],
+            "dependsOn": [
+                "Prepare build directory"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Run C++ app (macOS Terminal)",
+            "type": "shell",
+            "command": "${workspaceFolder}/.vscode/run-in-terminal.sh",
+            "args": [
+                "${workspaceFolder}"
+            ],
+            "dependsOn": [
+                "Build C++ project"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
