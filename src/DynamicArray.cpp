@@ -76,3 +76,17 @@ bool DynamicArray::isEmpty() const {
 void DynamicArray::clear() {
     size = 0;
 }
+
+DynamicArray DynamicArray::getFirstN(int n) const{
+    DynamicArray result;
+
+    if (n > size) {
+        n = size;
+    }
+
+    for (int i = 0; i < n; i++) {
+        result.pushBack(data[i]);
+    }
+
+    return result;
+}

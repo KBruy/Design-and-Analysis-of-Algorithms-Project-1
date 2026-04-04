@@ -6,16 +6,22 @@ int main() {
     DynamicArray movies;
     movies.pushBack(Movie("Film 1", 8.0, true));
     movies.pushBack(Movie("Film 2", 7.5, true));
+    movies.pushBack(Movie("Film 3", 9.1, true));
+    movies.pushBack(Movie("Film 4", 6.8, true));
 
-    DynamicArray copy = movies;
+    DynamicArray smallSet = movies.getFirstN(2);
 
-    movies.get(0).setTitle("Zmieniony film");
+    std::cout << "Pelna tablica:" << std::endl;
+    for (int i = 0; i < movies.getSize(); i++) {
+        std::cout << movies.get(i).getTitle() << std::endl;
+    }
 
-    std::cout << "Oryginal:" << std::endl;
-    std::cout << movies.get(0).getTitle() << std::endl;
+    std::cout << std::endl;
 
-    std::cout << "Kopia:" << std::endl;
-    std::cout << copy.get(0).getTitle() << std::endl;
+    std::cout << "Pierwsze 2 elementy:" << std::endl;
+    for (int i = 0; i < smallSet.getSize(); i++) {
+        std::cout << smallSet.get(i).getTitle() << std::endl;
+    }
 
     return 0;
 }

@@ -27,6 +27,8 @@ public:
     bool isEmpty() const;
 
     void clear();
+
+    DynamicArray getFirstN(int n) const; //zwraca nową tabilcę z pierwszych n elementów
     
 };
 
