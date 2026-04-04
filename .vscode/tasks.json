@@ -14,18 +14,7 @@
         {
             "label": "Build C++ project",
             "type": "shell",
-            "command": "g++",
-            "args": [
-                "-std=c++17",
-                "-Wall",
-                "-Wextra",
-                "-I${workspaceFolder}/include",
-                "${workspaceFolder}/src/main.cpp",
-                "${workspaceFolder}/src/Movie.cpp",
-                "${workspaceFolder}/src/DynamicArray.cpp",
-                "-o",
-                "${workspaceFolder}/build/app"
-            ],
+            "command": "g++ -std=c++17 -Wall -Wextra -I\"${workspaceFolder}/include\" \"${workspaceFolder}/src/\"*.cpp -o \"${workspaceFolder}/build/app\"",
             "dependsOn": [
                 "Prepare build directory"
             ],
