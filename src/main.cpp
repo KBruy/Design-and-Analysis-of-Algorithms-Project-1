@@ -1,26 +1,40 @@
 #include <iostream>
+#include <iomanip>
 #include "../include/CsvReader.h"
 #include "../include/DataFilter.h"
+#include "../include/MergeSort.h"
 
 int main() {
     CsvReader reader;
     DataFilter filter;
+    MergeSort sorter;
 
     DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
     DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
+    DynamicArray dataSet = filter.prepareDataSet(filteredMovies, 10000);
 
-    DynamicArray data10000 = filter.prepareDataSet(filteredMovies, 10000);
-    DynamicArray data100000 = filter.prepareDataSet(filteredMovies, 100000);
-    DynamicArray data500000 = filter.prepareDataSet(filteredMovies, 500000);
-    DynamicArray data1000000 = filter.prepareDataSet(filteredMovies, 1000000);
-    DynamicArray dataMax = filter.prepareDataSet(filteredMovies, filteredMovies.getSize());
+    std::cout << "Przed sortowaniem:" << std::endl;
+    std::cout << std::fixed << std::setprecision(1);
 
-    std::cout << "Liczba filmow po filtrowaniu: " << filteredMovies.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 10000: " << data10000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 100000: " << data100000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 500000: " << data500000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 1000000: " << data1000000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru max: " << dataMax.getSize() << std::endl;
+    for (int i = 0; i < 10 && i < dataSet.getSize(); i++) {
+        std::cout << dataSet.get(i).getTitle() << " - " << dataSet.get(i).getRanking() << std::endl;
+    }
+
+    sorter.sort(dataSet);
+
+    std::cout << std::endl;
+    std::cout << "Po sortowaniu:" << std::endl;
+
+    for (int i = 0; i < 10 && i < dataSet.getSize(); i++) {
+        std::cout << dataSet.get(i).getTitle() << " - " << dataSet.get(i).getRanking() << std::endl;
+    }
+
+    std::cout << std::endl;
+    if (filter.isSortedByRating(dataSet)) {
+        std::cout << "Tablica jest posortowana poprawnie." << std::endl;
+    } else {
+        std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
+    }
 
     return 0;
 }
