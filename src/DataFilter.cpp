@@ -23,3 +23,7 @@ int DataFilter::countMoviesWithoutRating(const DynamicArray& movies) {
 
     return count;
 }
+
+DynamicArray DataFilter::prepareDataSet(const DynamicArray& movies, int size) {
+    return movies.getFirstN(size);
+}

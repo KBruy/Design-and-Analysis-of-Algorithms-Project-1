@@ -1,4 +1,4 @@
-#include"../include/DynamicArray.h"
+#include "../include/DynamicArray.h"
 
 DynamicArray::DynamicArray() {
     capacity = 10;
@@ -7,8 +7,8 @@ DynamicArray::DynamicArray() {
 }
 
 DynamicArray::DynamicArray(const DynamicArray& other) {
-    capacity = other.capacity;
     size = other.size;
+    capacity = other.capacity;
     data = new Movie[capacity];
 
     for (int i = 0; i < size; i++) {
@@ -17,53 +17,22 @@ DynamicArray::DynamicArray(const DynamicArray& other) {
 }
 
 DynamicArray& DynamicArray::operator=(const DynamicArray& other) {
-    if (this == &other) {
-        return *this;
+    if (this != &other) {
+        delete[] data;
+
+        size = other.size;
+        capacity = other.capacity;
+        data = new Movie[capacity];
+
+        for (int i = 0; i < size; i++) {
+            data[i] = other.data[i];
+        }
     }
-
-    Movie* newData = new Movie[other.capacity];
-
-    for (int i = 0; i < other.size; i++) {
-        newData[i] = other.data[i];
-    }
-
-    delete[] data;
-    data = newData;
-    size = other.size;
-    capacity = other.capacity;
 
     return *this;
 }
 
-DynamicArray::DynamicArray(DynamicArray&& other) noexcept {
-    data = other.data;
-    size = other.size;
-    capacity = other.capacity;
-
-    other.data = nullptr;
-    other.size = 0;
-    other.capacity = 0;
-}
-
-DynamicArray& DynamicArray::operator=(DynamicArray&& other) noexcept {
-    if (this == &other) {
-        return *this;
-    }
-
-    delete[] data;
-
-    data = other.data;
-    size = other.size;
-    capacity = other.capacity;
-
-    other.data = nullptr;
-    other.size = 0;
-    other.capacity = 0;
-
-    return *this;
-}
-
-DynamicArray::~DynamicArray(){
+DynamicArray::~DynamicArray() {
     delete[] data;
 }
 
@@ -71,7 +40,7 @@ void DynamicArray::resize() {
     capacity = capacity * 2;
     Movie* newData = new Movie[capacity];
 
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         newData[i] = data[i];
     }
 
@@ -80,7 +49,7 @@ void DynamicArray::resize() {
 }
 
 void DynamicArray::pushBack(const Movie& movie) {
-    if (size >= capacity){
+    if (size >= capacity) {
         resize();
     }
 
@@ -88,7 +57,7 @@ void DynamicArray::pushBack(const Movie& movie) {
     size++;
 }
 
-Movie& DynamicArray::get(int index){
+Movie& DynamicArray::get(int index) {
     return data[index];
 }
 
@@ -104,6 +73,20 @@ bool DynamicArray::isEmpty() const {
     return size == 0;
 }
 
-void DynamicArray::clear(){
+void DynamicArray::clear() {
     size = 0;
+}
+
+DynamicArray DynamicArray::getFirstN(int n) const{
+    DynamicArray result;
+
+    if (n > size) {
+        n = size;
+    }
+
+    for (int i = 0; i < n; i++) {
+        result.pushBack(data[i]);
+    }
+
+    return result;
 }

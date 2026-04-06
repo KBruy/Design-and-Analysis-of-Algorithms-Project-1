@@ -7,6 +7,7 @@ class DataFilter {
 public:
     DynamicArray filterMoviesWithRating(const DynamicArray& movies);
     int countMoviesWithoutRating(const DynamicArray& movies);
+    DynamicArray prepareDataSet(const DynamicArray& movies, int size);
 };
 
 #endif
