@@ -6,8 +6,8 @@
 class QuickSort {
 
     private:
-        void quickSort(DynamicArray& arr, int left, int right); // bierze fragment tablicy, dzieli go i wywołuje samą siebie dla lewej i prawej części
-        int partition(DynamicArray& arr, int left, int right); //wybiera pivot, ustawiwa mniejsze elementy po jednej stronie, większe po drugiej, zwraca końcową pozycję pivota
+        void quickSort(DynamicArray& arr, int left, int right); // bierze fragment tablicy i sortuje go w miejscu
+        void partition(DynamicArray& arr, int left, int right, int& lessEnd, int& greaterStart); // dzieli zakres na < pivot, == pivot i > pivot
 
     public:
         void sort(DynamicArray& arr); //wywoływane z menu
