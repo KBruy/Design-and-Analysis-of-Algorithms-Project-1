@@ -2,6 +2,7 @@
 #include <chrono>
 #include "../include/CsvReader.h"
 #include "../include/DataFilter.h"
+#include "../include/MergeSort.h"
 
 int main() {
     int choice;
@@ -18,7 +19,7 @@ int main() {
         std::cin >> choice;
 
         switch (choice) {
-            case 1: {
+            case 1: { //przeszukiwanie i filtrowanie danych
                 CsvReader reader;
                 DataFilter filter;
 
@@ -32,20 +33,50 @@ int main() {
                 DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
                 auto filterEnd = std::chrono::high_resolution_clock::now();
 
-                auto searchDuration = std::chrono::duration_cast<std::chrono::milliseconds>(searchEnd - searchStart);
-                auto filterDuration = std::chrono::duration_cast<std::chrono::milliseconds>(filterEnd - filterStart);
+                auto searchDuration = std::chrono::duration_cast<std::chrono::microseconds>(searchEnd - searchStart);
+                auto filterDuration = std::chrono::duration_cast<std::chrono::microseconds>(filterEnd - filterStart);
 
                 std::cout << std::endl;
                 std::cout << "Liczba wszystkich filmow: " << movies.getSize() << std::endl;
                 std::cout << "Liczba filmow bez rankingu: " << missingRatings << std::endl;
                 std::cout << "Liczba filmow po filtrowaniu: " << filteredMovies.getSize() << std::endl;
-                std::cout << "Czas przeszukiwania: " << searchDuration.count() << " ms" << std::endl;
-                std::cout << "Czas filtrowania: " << filterDuration.count() << " ms" << std::endl;
+                std::cout << "Czas przeszukiwania: " << searchDuration.count() << " us" << std::endl;
+                std::cout << "Czas filtrowania: " << filterDuration.count() << " us" << std::endl;
                 break;
             }
-            case 2:
-                std::cout << "Wybrano merge sort." << std::endl;
+
+            case 2: { //merge sort
+                CsvReader reader;
+                DataFilter filter;
+                MergeSort sorter;
+
+                int dataSize;
+                std::cout << "Podaj rozmiar zbioru danych: ";
+                std::cin >> dataSize;
+
+                DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
+                DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
+                DynamicArray dataSet = filter.prepareDataSet(filteredMovies, dataSize);
+
+                auto sortStart = std::chrono::high_resolution_clock::now();
+                sorter.sort(dataSet);
+                auto sortEnd = std::chrono::high_resolution_clock::now();
+
+                auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
+
+                std::cout << std::endl;
+                std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
+                std::cout << "Czas sortowania merge sort: " << sortDuration.count() << " us" << std::endl;
+                
+                std::cout << "Weryfikacja poprawności sortowania: "<< std::endl;
+                if (filter.isSortedByRating(dataSet)) {
+                    std::cout << "Tablica jest posortowana poprawnie." << std::endl;
+                } else {
+                    std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
+                }
+
                 break;
+            }
             case 3:
                 std::cout << "Quicksort jeszcze niezaimplementowany." << std::endl;
                 break;
