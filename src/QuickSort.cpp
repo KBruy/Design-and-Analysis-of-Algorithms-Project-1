@@ -1,51 +1,65 @@
 #include "../include/QuickSort.h"
-#include <utility>
 
-//jeśli tablica ma więcej niż 1 element to odpalamy quicksort dla całego zakresu
-void QuickSort::sort(DynamicArray& arr){
+void QuickSort::sort(DynamicArray& arr) {
     if (arr.getSize() > 1) {
         quickSort(arr, 0, arr.getSize() - 1);
     }
 }
 
+//3-way partition
 void QuickSort::quickSort(DynamicArray& arr, int left, int right) {
-    while (left < right) {
-        int lessEnd;
-        int greaterStart;
-        partition(arr, left, right, lessEnd, greaterStart);
-
-        // Rekurencyjnie sortujemy tylko mniejszą część, żeby ograniczyć głębokość stosu.
-        if (lessEnd - left < right - greaterStart) {
-            quickSort(arr, left, lessEnd);
-            left = greaterStart;
-        } else {
-            quickSort(arr, greaterStart, right);
-            right = lessEnd;
-        }
+    
+    if (left >= right) { // warunek stopu rekurencji
+        return;
     }
+
+    int lessEnd; //wyznaczają środkowy zakres elementów równych pivotowi (po wykonaniu partition) 
+    int greaterStart;
+
+    // dzielimy tablicę na 3 części: mniejsze od pivota, równe i większe
+    partition(arr, left, right, lessEnd, greaterStart);
+
+    // rekurencyjne sortowanie tylko części mniejszej od pivota
+    quickSort(arr, left, lessEnd - 1);
+
+    // tylko część większa od pivota
+    quickSort(arr, greaterStart + 1, right);
 }
 
 void QuickSort::partition(DynamicArray& arr, int left, int right, int& lessEnd, int& greaterStart) {
-    double pivot = arr.get(left + (right - left) / 2).getRanking();
-    int less = left;
-    int current = left;
-    int greater = right;
+    // Jako pivot wybieramy ostatni element zakresu
+    double pivot = arr.get(right).getRanking();
 
-    while (current <= greater) {
-        double ranking = arr.get(current).getRanking();
+    int lessIndex = left; //początek obszaru elementów równych pivotowi
+    int currentIndex = left; //aktualnie sprawdzany element
+    int greaterIndex = right; //koniec obszaru elementów równych pivotowi
 
-        if (ranking < pivot) {
-            std::swap(arr.get(less), arr.get(current));
-            less++;
-            current++;
-        } else if (ranking > pivot) {
-            std::swap(arr.get(current), arr.get(greater));
-            greater--;
-        } else {
-            current++;
+    // Przechodzimy po tablicy dopóki currentIndex nie minie greaterIndex
+    while (currentIndex <= greaterIndex) {
+        // Jeśli bieżący element jest mniejszy od pivota to przenosimy go na początek
+        if (arr.get(currentIndex).getRanking() < pivot) {
+            Movie temp = arr.get(lessIndex);
+            arr.get(lessIndex) = arr.get(currentIndex);
+            arr.get(currentIndex) = temp;
+
+            lessIndex++;
+            currentIndex++;
+        }
+        // Jeśli bieżący element jest większy od pivota, to przenosimy go na koniec
+        else if (arr.get(currentIndex).getRanking() > pivot) {
+            Movie temp = arr.get(currentIndex);
+            arr.get(currentIndex) = arr.get(greaterIndex);
+            arr.get(greaterIndex) = temp;
+
+            greaterIndex--;
+        }
+        // Jeśli bieżący element jest równy pivotowi, zostawiamy go w środkowej części i idziemy dalej
+        else {
+            currentIndex++;
         }
     }
 
-    lessEnd = less - 1;
-    greaterStart = greater + 1;
+    // Zwracamy granice środkowego zakresu elementów równych pivotowi
+    lessEnd = lessIndex;
+    greaterStart = greaterIndex;
 }
