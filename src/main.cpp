@@ -1,26 +1,34 @@
 #include <iostream>
-#include "../include/CsvReader.h"
-#include "../include/DataFilter.h"
+#include <iomanip>
+#include "../include/Movie.h"
+#include "../include/DynamicArray.h"
+#include "../include/MergeSort.h"
 
 int main() {
-    CsvReader reader;
-    DataFilter filter;
+    DynamicArray movies;
 
-    DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
-    DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
+    movies.pushBack(Movie("Film A", 8.7, true));
+    movies.pushBack(Movie("Film B", 6.2, true));
+    movies.pushBack(Movie("Film C", 9.1, true));
+    movies.pushBack(Movie("Film D", 7.5, true));
+    movies.pushBack(Movie("Film E", 8.0, true));
 
-    DynamicArray data10000 = filter.prepareDataSet(filteredMovies, 10000);
-    DynamicArray data100000 = filter.prepareDataSet(filteredMovies, 100000);
-    DynamicArray data500000 = filter.prepareDataSet(filteredMovies, 500000);
-    DynamicArray data1000000 = filter.prepareDataSet(filteredMovies, 1000000);
-    DynamicArray dataMax = filter.prepareDataSet(filteredMovies, filteredMovies.getSize());
+    std::cout << "Przed sortowaniem:" << std::endl;
+    std::cout << std::fixed << std::setprecision(1);
 
-    std::cout << "Liczba filmow po filtrowaniu: " << filteredMovies.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 10000: " << data10000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 100000: " << data100000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 500000: " << data500000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru 1000000: " << data1000000.getSize() << std::endl;
-    std::cout << "Rozmiar zbioru max: " << dataMax.getSize() << std::endl;
+    for (int i = 0; i < movies.getSize(); i++) {
+        std::cout << movies.get(i).getTitle() << " - " << movies.get(i).getRanking() << std::endl;
+    }
+
+    MergeSort sorter;
+    sorter.sort(movies);
+
+    std::cout << std::endl;
+    std::cout << "Po sortowaniu:" << std::endl;
+
+    for (int i = 0; i < movies.getSize(); i++) {
+        std::cout << movies.get(i).getTitle() << " - " << movies.get(i).getRanking() << std::endl;
+    }
 
     return 0;
 }
