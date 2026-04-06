@@ -27,3 +27,12 @@ int DataFilter::countMoviesWithoutRating(const DynamicArray& movies) {
 DynamicArray DataFilter::prepareDataSet(const DynamicArray& movies, int size) {
     return movies.getFirstN(size);
 }
+
+bool DataFilter::isSortedByRating(const DynamicArray& movies) {
+    for (int i = 0; i < movies.getSize() - 1; i++) {
+        if (movies.get(i).getRanking() > movies.get(i+1).getRanking()){
+            return false;
+        }
+    }
+    return true;
+}

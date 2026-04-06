@@ -3,6 +3,7 @@
 #include "../include/Movie.h"
 #include "../include/DynamicArray.h"
 #include "../include/MergeSort.h"
+#include "../include/DataFilter.h"
 
 int main() {
     DynamicArray movies;
@@ -28,6 +29,15 @@ int main() {
 
     for (int i = 0; i < movies.getSize(); i++) {
         std::cout << movies.get(i).getTitle() << " - " << movies.get(i).getRanking() << std::endl;
+    }
+
+    DataFilter filter;
+
+    std::cout << std::endl;
+    if (filter.isSortedByRating(movies)) {
+        std::cout << "Tablica jest posortowana poprawnie." << std::endl;
+    } else {
+        std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
     }
 
     return 0;
