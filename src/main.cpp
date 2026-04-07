@@ -5,6 +5,7 @@
 #include "../include/DataFilter.h"
 #include "../include/MergeSort.h"
 #include "../include/QuickSort.h"
+#include "../include/IntroSort.h"
 
 int main() {
     int choice;
@@ -231,10 +232,103 @@ int main() {
 
                     break;
                 }
-
+//==================================================================================================
+// INTROSORT
             case 4:
-                std::cout << "Introsort jeszcze niezaimplementowany." << std::endl;
-                break;
+            {
+                CsvReader reader;
+                DataFilter filter;
+                IntroSort sorter;
+
+                int sizeChoice;
+                int dataSize = 0;
+                bool viusalTest = false;
+
+                std::cout << std::endl;
+                std::cout << "==== INTROSORT ====" <<std::endl;
+                std::cout << "1. 50 (test wizualny)" <<std::endl;
+                std::cout << "2. 10000" << std::endl;
+                std::cout << "3. 100000" << std::endl;
+                std::cout << "4. 500000" << std::endl;
+                std::cout << "5. 1000000" << std::endl;
+                std::cout << "6. max" <<std::endl;
+                std::cout << "Wybor: ";
+                std::cin >> sizeChoice;
+
+                DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
+                DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
+
+                if(sizeChoice == 1){
+                    dataSize = 50;
+                    viusalTest = true;
+                } else if (sizeChoice == 2) {
+                    dataSize = 10000;
+                } else if (sizeChoice == 3) {
+                    dataSize = 100000;
+                } else if (sizeChoice == 4) {
+                    dataSize = 500000;
+                } else if (sizeChoice == 5){
+                    dataSize = 1000000;
+                } else if (sizeChoice == 6) {
+                    dataSize = filteredMovies.getSize();
+                }
+                else {
+                    std::cout << "Nieprawidlowy wybor" <<std::endl;
+                    break;
+                }
+
+                DynamicArray dataSet = filter.prepareDataSet(filteredMovies, dataSize);
+
+                if (viusalTest) {
+                    std::cout << std::endl;
+                    std::cout << "Przed sortowaniem: " << std::endl;
+
+                    for (int i = 0; i < dataSet.getSize(); i++) {
+                        std::cout << dataSet.get(i).getTitle() << " - " << dataSet.get(i).getRanking() << std::endl;
+
+                    }
+
+                    sorter.sort(dataSet);
+
+                    std::cout << std::endl;
+                    std::cout << "Po sortowaniu: "<< std::endl;
+
+                    for (int i = 0; i < dataSet.getSize(); i++) {
+                        std::cout << dataSet.get(i).getTitle() << " - " << dataSet.get(i).getRanking() << std::endl;
+                    }
+
+                    std::cout << std::endl;
+                    std::cout << "Weryfikacja poprawnosci sortowania: "<< std::endl;
+
+                    if (filter.isSortedByRating(dataSet)) {
+                        std::cout << "Tablica jest posortowana poprawnie" << std::endl;
+                    } else {
+                        std::cout << "Tablica NIE jest posortowana poprawnie" << std::endl;
+                    }
+
+                } else{
+
+                    auto sortStart = std::chrono::high_resolution_clock::now();
+                    sorter.sort(dataSet);
+                    auto sortEnd = std::chrono::high_resolution_clock::now();
+
+                    auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
+
+                    std::cout << std::endl;
+                    std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
+                    std::cout << "Czas sortowania introsort: " << sortDuration.count() << " us" << std::endl;
+                    std::cout << "Weryfikacja poprawnosci sortowania: "<<std::endl;
+
+                    if (filter.isSortedByRating(dataSet)) {
+                        std::cout << "Tablica jest posortowana poprawnie" << std::endl;
+                    } else {
+                        std::cout << "Tablica NIE jest posortowana poprawnie" << std::endl;
+                    }
+            }
+
+            break;
+        }
+
             case 0:
                 std::cout << "Koniec programu." << std::endl;
                 break;
