@@ -119,26 +119,32 @@ int main() {
                         std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
                     }
                 } else {
-                    auto sortStart = std::chrono::high_resolution_clock::now();
-                    sorter.sort(dataSet);
-                    auto sortEnd = std::chrono::high_resolution_clock::now();
+                    
+                auto sortStart = std::chrono::high_resolution_clock::now();
+                sorter.sort(dataSet);
+                auto sortEnd = std::chrono::high_resolution_clock::now();
 
-                    auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
+                auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
 
-                    std::cout << std::endl;
-                    std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
-                    std::cout << "Czas sortowania merge sort: " << sortDuration.count() << " us" << std::endl;
-                    std::cout << "Weryfikacja poprawnosci sortowania:" << std::endl;
+                // Po sortowaniu liczymy statystyki
+                double averageRating = filter.calculateAverageRating(dataSet);
+                double medianRating = filter.calculateMedianRating(dataSet);
 
-                    if (filter.isSortedByRating(dataSet)) {
-                        std::cout << "Tablica jest posortowana poprawnie." << std::endl;
-                    } else {
-                        std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
-                    }
+                std::cout << std::endl;
+                std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
+                std::cout << "Czas sortowania merge sort: " << sortDuration.count() << " us" << std::endl;
+                std::cout << "Srednia rankingu: " << averageRating << std::endl;
+                std::cout << "Mediana rankingu: " << medianRating << std::endl;
+                std::cout << "Weryfikacja poprawnosci sortowania:" << std::endl;
+
+                if (filter.isSortedByRating(dataSet)) {
+                    std::cout << "Tablica jest posortowana poprawnie." << std::endl;
+                } else {
+                    std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
                 }
-
-                break;
             }
+            break;
+        }
 
 //======================================================================================================
 // QUICKSORT
@@ -218,9 +224,15 @@ int main() {
 
                         auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
 
+                        // Po sortowaniu liczymy statystyki
+                        double averageRating = filter.calculateAverageRating(dataSet);
+                        double medianRating = filter.calculateMedianRating(dataSet);
+
                         std::cout << std::endl;
                         std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
                         std::cout << "Czas sortowania quicksort: " << sortDuration.count() << " us" << std::endl;
+                        std::cout << "Srednia rankingu: " << averageRating << std::endl;
+                        std::cout << "Mediana rankingu: " << medianRating << std::endl;
                         std::cout << "Weryfikacja poprawnosci sortowania:" << std::endl;
 
                         if (filter.isSortedByRating(dataSet)) {
@@ -314,15 +326,21 @@ int main() {
 
                     auto sortDuration = std::chrono::duration_cast<std::chrono::microseconds>(sortEnd - sortStart);
 
+                    // Po sortowaniu liczymy statystyki
+                    double averageRating = filter.calculateAverageRating(dataSet);
+                    double medianRating = filter.calculateMedianRating(dataSet);
+
                     std::cout << std::endl;
                     std::cout << "Rzeczywisty rozmiar zbioru: " << dataSet.getSize() << std::endl;
                     std::cout << "Czas sortowania introsort: " << sortDuration.count() << " us" << std::endl;
-                    std::cout << "Weryfikacja poprawnosci sortowania: "<<std::endl;
+                    std::cout << "Srednia rankingu: " << averageRating << std::endl;
+                    std::cout << "Mediana rankingu: " << medianRating << std::endl;
+                    std::cout << "Weryfikacja poprawnosci sortowania:" << std::endl;
 
                     if (filter.isSortedByRating(dataSet)) {
-                        std::cout << "Tablica jest posortowana poprawnie" << std::endl;
+                        std::cout << "Tablica jest posortowana poprawnie." << std::endl;
                     } else {
-                        std::cout << "Tablica NIE jest posortowana poprawnie" << std::endl;
+                        std::cout << "Tablica NIE jest posortowana poprawnie." << std::endl;
                     }
             }
 
