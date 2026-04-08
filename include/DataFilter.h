@@ -10,6 +10,9 @@ public:
     DynamicArray prepareDataSet(const DynamicArray& movies, int size);
 
     bool isSortedByRating(const DynamicArray& movies);
+
+    double calculateAverageRating(const DynamicArray& movies);
+    double calculateMedianRating(const DynamicArray& movies);
 };
 
 #endif

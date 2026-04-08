@@ -36,3 +36,36 @@ bool DataFilter::isSortedByRating(const DynamicArray& movies) {
     }
     return true;
 }
+
+double DataFilter::calculateAverageRating(const DynamicArray& movies) {
+    if (movies.getSize() == 0){
+        return 0.0;
+    }
+
+    double sum = 0.0;
+
+    for (int i = 0; i < movies.getSize(); i++) {
+        sum += movies.get(i).getRanking();
+    }
+
+    //Średnia = suma / liczba elementów
+    
+    return sum / movies.getSize();
+}
+
+double DataFilter::calculateMedianRating(const DynamicArray& movies) {
+    if (movies.getSize() == 0){
+        return 0.0;
+    }
+
+    int size = movies.getSize();
+    int middleIndex = size / 2;
+
+    // tablica przekazana do tej funkcji jest już posortowana
+
+    if (size % 2 == 1) {
+        return movies.get(middleIndex).getRanking();
+    }
+
+    return (movies.get(middleIndex - 1).getRanking() + movies.get(middleIndex).getRanking()) / 2.0;
+}
