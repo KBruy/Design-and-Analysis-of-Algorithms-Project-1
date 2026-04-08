@@ -63,10 +63,12 @@ int main() {
                 std::cout << "===== MERGE SORT =====" << std::endl;
                 std::cout << "1. 50 (test wizualny)" << std::endl;
                 std::cout << "2. 10000" << std::endl;
-                std::cout << "3. 100000" << std::endl;
-                std::cout << "4. 500000" << std::endl;
-                std::cout << "5. 1000000" << std::endl;
-                std::cout << "6. max" << std::endl;
+                std::cout << "3. 50000" << std::endl;
+                std::cout << "4. 100000" << std::endl;
+                std::cout << "5. 250000" << std::endl;
+                std::cout << "6. 500000" << std::endl;
+                std::cout << "7. 1000000" << std::endl;
+                std::cout << "8. max" << std::endl;
                 std::cout << "Wybor: ";
                 std::cin >> sizeChoice;
 
@@ -79,12 +81,16 @@ int main() {
                 } else if (sizeChoice == 2) {
                     dataSize = 10000;
                 } else if (sizeChoice == 3) {
-                    dataSize = 100000;
+                    dataSize = 50000;
                 } else if (sizeChoice == 4) {
-                    dataSize = 500000;
+                    dataSize = 100000;
                 } else if (sizeChoice == 5) {
-                    dataSize = 1000000;
+                    dataSize = 250000;
                 } else if (sizeChoice == 6) {
+                    dataSize = 500000;
+                } else if (sizeChoice == 7) {
+                    dataSize = 1000000;
+                } else if (sizeChoice == 8) {
                     dataSize = filteredMovies.getSize();
                 } else {
                     std::cout << "Nieprawidlowy wybor." << std::endl;
@@ -162,10 +168,12 @@ int main() {
                     std::cout << "===== QUICKSORT =====" << std::endl;
                     std::cout << "1. 50 (test wizualny)" << std::endl;
                     std::cout << "2. 10000" << std::endl;
-                    std::cout << "3. 100000" << std::endl;
-                    std::cout << "4. 500000" << std::endl;
-                    std::cout << "5. 1000000" << std::endl;
-                    std::cout << "6. max" << std::endl;
+                    std::cout << "3. 50000" << std::endl;
+                    std::cout << "4. 100000" << std::endl;
+                    std::cout << "5. 250000" << std::endl;
+                    std::cout << "6. 500000" << std::endl;
+                    std::cout << "7. 1000000" << std::endl;
+                    std::cout << "8. max" << std::endl;
                     std::cout << "Wybor: ";
                     std::cin >> sizeChoice;
 
@@ -178,12 +186,16 @@ int main() {
                     } else if (sizeChoice == 2) {
                         dataSize = 10000;
                     } else if (sizeChoice == 3) {
-                        dataSize = 100000;
+                        dataSize = 50000;
                     } else if (sizeChoice == 4) {
-                        dataSize = 500000;
+                        dataSize = 100000;
                     } else if (sizeChoice == 5) {
-                        dataSize = 1000000;
+                        dataSize = 250000;
                     } else if (sizeChoice == 6) {
+                        dataSize = 500000;
+                    } else if (sizeChoice == 7) {
+                        dataSize = 1000000;
+                    } else if (sizeChoice == 8) {
                         dataSize = filteredMovies.getSize();
                     } else {
                         std::cout << "Nieprawidlowy wybor." << std::endl;
@@ -260,10 +272,12 @@ int main() {
                 std::cout << "==== INTROSORT ====" <<std::endl;
                 std::cout << "1. 50 (test wizualny)" <<std::endl;
                 std::cout << "2. 10000" << std::endl;
-                std::cout << "3. 100000" << std::endl;
-                std::cout << "4. 500000" << std::endl;
-                std::cout << "5. 1000000" << std::endl;
-                std::cout << "6. max" <<std::endl;
+                std::cout << "3. 50000" << std::endl;
+                std::cout << "4. 100000" << std::endl;
+                std::cout << "5. 250000" << std::endl;
+                std::cout << "6. 500000" << std::endl;
+                std::cout << "7. 1000000" << std::endl;
+                std::cout << "8. max" <<std::endl;
                 std::cout << "Wybor: ";
                 std::cin >> sizeChoice;
 
@@ -276,12 +290,16 @@ int main() {
                 } else if (sizeChoice == 2) {
                     dataSize = 10000;
                 } else if (sizeChoice == 3) {
-                    dataSize = 100000;
+                    dataSize = 50000;
                 } else if (sizeChoice == 4) {
-                    dataSize = 500000;
+                    dataSize = 100000;
                 } else if (sizeChoice == 5){
-                    dataSize = 1000000;
+                    dataSize = 250000;
                 } else if (sizeChoice == 6) {
+                    dataSize = 500000;
+                } else if (sizeChoice == 7){
+                    dataSize = 1000000;
+                } else if (sizeChoice == 8) {
                     dataSize = filteredMovies.getSize();
                 }
                 else {
