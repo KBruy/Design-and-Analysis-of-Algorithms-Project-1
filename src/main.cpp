@@ -57,6 +57,7 @@ int main() {
                 int sizeChoice;
                 int dataSize = 0;
                 bool visualTest = false;
+                bool validChoice = true;
 
                 std::cout << std::endl;
                 std::cout << "===== MERGE SORT =====" << std::endl;
@@ -74,25 +75,39 @@ int main() {
                 DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
                 DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
 
-                if (sizeChoice == 1) {
-                    dataSize = 50;
-                    visualTest = true;
-                } else if (sizeChoice == 2) {
-                    dataSize = 10000;
-                } else if (sizeChoice == 3) {
-                    dataSize = 50000;
-                } else if (sizeChoice == 4) {
-                    dataSize = 100000;
-                } else if (sizeChoice == 5) {
-                    dataSize = 250000;
-                } else if (sizeChoice == 6) {
-                    dataSize = 500000;
-                } else if (sizeChoice == 7) {
-                    dataSize = 1000000;
-                } else if (sizeChoice == 8) {
-                    dataSize = filteredMovies.getSize();
-                } else {
-                    std::cout << "Nieprawidlowy wybor." << std::endl;
+                switch (sizeChoice) {
+                    case 1:
+                        dataSize = 50;
+                        visualTest = true;
+                        break;
+                    case 2:
+                        dataSize = 10000;
+                        break;
+                    case 3:
+                        dataSize = 50000;
+                        break;
+                    case 4:
+                        dataSize = 100000;
+                        break;
+                    case 5:
+                        dataSize = 250000;
+                        break;
+                    case 6:
+                        dataSize = 500000;
+                        break;
+                    case 7:
+                        dataSize = 1000000;
+                        break;
+                    case 8:
+                        dataSize = filteredMovies.getSize();
+                        break;
+                    default:
+                        validChoice = false;
+                        std::cout << "Nieprawidlowy wybor." << std::endl;
+                        break;
+                }
+
+                if (!validChoice) {
                     break;
                 }
 
@@ -158,6 +173,7 @@ int main() {
                 int sizeChoice;
                 int dataSize = 0;
                 bool visualTest = false;
+                bool validChoice = true;
 
                 std::cout << std::endl;
                 std::cout << "===== QUICKSORT =====" << std::endl;
@@ -175,25 +191,39 @@ int main() {
                 DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
                 DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
 
-                if (sizeChoice == 1) {
-                    dataSize = 50;
-                    visualTest = true;
-                } else if (sizeChoice == 2) {
-                    dataSize = 10000;
-                } else if (sizeChoice == 3) {
-                    dataSize = 50000;
-                } else if (sizeChoice == 4) {
-                    dataSize = 100000;
-                } else if (sizeChoice == 5) {
-                    dataSize = 250000;
-                } else if (sizeChoice == 6) {
-                    dataSize = 500000;
-                } else if (sizeChoice == 7) {
-                    dataSize = 1000000;
-                } else if (sizeChoice == 8) {
-                    dataSize = filteredMovies.getSize();
-                } else {
-                    std::cout << "Nieprawidlowy wybor." << std::endl;
+                switch (sizeChoice) {
+                    case 1:
+                        dataSize = 50;
+                        visualTest = true;
+                        break;
+                    case 2:
+                        dataSize = 10000;
+                        break;
+                    case 3:
+                        dataSize = 50000;
+                        break;
+                    case 4:
+                        dataSize = 100000;
+                        break;
+                    case 5:
+                        dataSize = 250000;
+                        break;
+                    case 6:
+                        dataSize = 500000;
+                        break;
+                    case 7:
+                        dataSize = 1000000;
+                        break;
+                    case 8:
+                        dataSize = filteredMovies.getSize();
+                        break;
+                    default:
+                        validChoice = false;
+                        std::cout << "Nieprawidlowy wybor." << std::endl;
+                        break;
+                }
+
+                if (!validChoice) {
                     break;
                 }
 
@@ -259,6 +289,7 @@ int main() {
                 int sizeChoice;
                 int dataSize = 0;
                 bool visualTest = false;
+                bool validChoice = true;
 
                 std::cout << std::endl;
                 std::cout << "===== BUCKET SORT =====" << std::endl;
@@ -276,25 +307,39 @@ int main() {
                 DynamicArray movies = reader.loadMoviesFromFile("data/projekt1_dane.csv");
                 DynamicArray filteredMovies = filter.filterMoviesWithRating(movies);
 
-                if (sizeChoice == 1) {
-                    dataSize = 50;
-                    visualTest = true;
-                } else if (sizeChoice == 2) {
-                    dataSize = 10000;
-                } else if (sizeChoice == 3) {
-                    dataSize = 50000;
-                } else if (sizeChoice == 4) {
-                    dataSize = 100000;
-                } else if (sizeChoice == 5) {
-                    dataSize = 250000;
-                } else if (sizeChoice == 6) {
-                    dataSize = 500000;
-                } else if (sizeChoice == 7) {
-                    dataSize = 1000000;
-                } else if (sizeChoice == 8) {
-                    dataSize = filteredMovies.getSize();
-                } else {
-                    std::cout << "Nieprawidlowy wybor." << std::endl;
+                switch (sizeChoice) {
+                    case 1:
+                        dataSize = 50;
+                        visualTest = true;
+                        break;
+                    case 2:
+                        dataSize = 10000;
+                        break;
+                    case 3:
+                        dataSize = 50000;
+                        break;
+                    case 4:
+                        dataSize = 100000;
+                        break;
+                    case 5:
+                        dataSize = 250000;
+                        break;
+                    case 6:
+                        dataSize = 500000;
+                        break;
+                    case 7:
+                        dataSize = 1000000;
+                        break;
+                    case 8:
+                        dataSize = filteredMovies.getSize();
+                        break;
+                    default:
+                        validChoice = false;
+                        std::cout << "Nieprawidlowy wybor." << std::endl;
+                        break;
+                }
+
+                if (!validChoice) {
                     break;
                 }
 
